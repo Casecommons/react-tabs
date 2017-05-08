@@ -212,12 +212,13 @@ export default class UncontrolledTabs extends Component {
     if (this.isTabFromContainer(e.target)) {
       let index = this.props.selectedIndex;
       let preventDefault = false;
+      const { disabledUpDownArrowKey } = this.props;
 
-      if (e.keyCode === 37 || e.keyCode === 38) {
+      if (e.keyCode === 37 || (e.keyCode === 38 && !disabledUpDownArrowKey)) {
         // Select next tab to the left
         index = this.getPrevTab(index);
         preventDefault = true;
-      } else if (e.keyCode === 39 || e.keyCode === 40) {
+      } else if (e.keyCode === 39 || (e.keyCode === 40 && !disabledUpDownArrowKey)) {
         // Select next tab to the right
         index = this.getNextTab(index);
         preventDefault = true;
@@ -277,6 +278,7 @@ export default class UncontrolledTabs extends Component {
       children, // unused
       className,
       disabledTabClassName, // unused
+      disabledUpDownArrowKey, // unused
       focus, // unused
       forceRenderTabPanel, // unused
       onSelect, // unused
